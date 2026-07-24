@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>日本球场地区多语言标准化工具｜Windows 使用说明</title>
+  <style>
+    :root{--ink:#17202a;--muted:#5f6b76;--blue:#1f4e78;--sky:#eaf4fb;--line:#d9e2e8;--green:#19704a;--amber:#9a5b00;--paper:#fff}
+    *{box-sizing:border-box} body{margin:0;background:#f4f7f9;color:var(--ink);font:16px/1.7 "Microsoft YaHei","Segoe UI",sans-serif}
+    header{background:linear-gradient(135deg,#173a59,#2475a9);color:#fff;padding:54px 24px 48px} header div,main{max-width:980px;margin:auto}
+    h1{margin:0 0 12px;font-size:32px;line-height:1.25} header p{margin:0;opacity:.9;font-size:18px}
+    main{padding:28px 20px 60px} section{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px 30px;margin:18px 0;box-shadow:0 5px 18px rgba(26,55,78,.05)}
+    h2{margin:0 0 18px;color:var(--blue);font-size:23px} h3{margin:24px 0 8px;font-size:18px} code{background:#eef2f5;border-radius:5px;padding:2px 6px;font-family:Consolas,monospace}
+    .hero-grid,.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{border:1px solid var(--line);border-radius:10px;padding:16px;background:#fbfdfe}
+    .step{display:grid;grid-template-columns:42px 1fr;gap:14px;margin:18px 0}.number{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:700}
+    .ok{border-left:5px solid var(--green);background:#eef9f4;padding:14px 18px;border-radius:7px}.warn{border-left:5px solid #d28a16;background:#fff8e9;padding:14px 18px;border-radius:7px}
+    table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px} th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--sky)}
+    kbd{border:1px solid #adb5bd;border-bottom-width:2px;border-radius:4px;background:#fff;padding:1px 6px} ul,ol{padding-left:22px}.small{color:var(--muted);font-size:14px}
+    .flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:22px 0}.flow span{background:var(--sky);border:1px solid #b8d7eb;border-radius:8px;padding:10px 16px}.arrow{color:var(--blue);font-weight:700}
+    footer{text-align:center;color:var(--muted);padding:0 20px 40px}@media(max-width:600px){h1{font-size:27px}section{padding:22px 19px}.step{grid-template-columns:36px 1fr}}
+  </style>
+</head>
+<body>
+<header><div><h1>日本球场地区多语言标准化工具</h1><p>Windows 新手使用说明｜离线依赖版</p></div></header>
+<main>
+  <section>
+    <h2>这个工具会做什么？</h2>
+    <div class="hero-grid">
+      <div class="card"><strong>自动清洗</strong><br><span class="small">过滤城市或地址为空的服务行。</span></div>
+      <div class="card"><strong>解析日本地址</strong><br><span class="small">提取都道府县和现行市町村，排除郡名。</span></div>
+      <div class="card"><strong>生成多语言 Excel</strong><br><span class="small">输出球场明细、市町村汇总和 47 都道府县对照。</span></div>
+      <div class="card"><strong>保留异常记录</strong><br><span class="small">看不懂的地址写入 CSV，不会让整个程序中断。</span></div>
+    </div>
+    <div class="flow"><span>原始 .xlsx</span><b class="arrow">→</b><span>双击/拖拽处理</span><b class="arrow">→</b><span>标准工作簿 + 异常 CSV</span></div>
+  </section>
+
+  <section>
+    <h2>第一次使用：只需完成一次</h2>
+    <div class="step"><div class="number">1</div><div><strong>安装 Python</strong><br>如果电脑还没有 Python，请从 Python 官网安装 Python 3.9 或更高版本。安装界面务必勾选 <code>Add Python to PATH</code>。安装后重新打开本目录。</div></div>
+    <div class="step"><div class="number">2</div><div><strong>双击“首次安装依赖.bat”</strong><br>它会在本目录创建 <code>.venv</code>，并从 <code>wheels</code> 文件夹离线安装依赖。看到“安装完成”即可。</div></div>
+    <div class="ok"><strong>依赖无需联网下载。</strong> Excel 处理库及其依赖安装包已经放在本目录的 <code>wheels</code> 文件夹中。只有电脑本身没有 Python 时，才需要先安装 Python。</div>
+  </section>
+
+  <section>
+    <h2>日常使用：推荐拖拽</h2>
+    <div class="step"><div class="number">1</div><div>关闭正在编辑的原始 Excel，确认文件后缀是 <code>.xlsx</code>。</div></div>
+    <div class="step"><div class="number">2</div><div>用鼠标把原始 Excel 文件拖到 <strong>“开始处理Excel.bat”</strong> 图标上，然后松开。</div></div>
+    <div class="step"><div class="number">3</div><div>等待黑色窗口显示“处理完成”。输出文件会保存在原始 Excel 的同一目录。</div></div>
+    <p>也可以把<strong>唯一一份</strong>原始 Excel 放进工具目录后，直接双击“开始处理Excel.bat”。如果目录里有多份原始表，请使用拖拽方式，避免选错。</p>
+    <div class="warn"><strong>不会修改原表，也不会覆盖以前的默认输出。</strong> 工具生成“原文件名_日本地区多语言对照汇总.xlsx”；如果同名结果已经存在，会自动改成 <code>_2</code>、<code>_3</code>。</div>
+  </section>
+
+  <section>
+    <h2>原始 Excel 必须满足什么格式？</h2>
+    <p>程序会自动寻找包含以下 5 个表头的 Sheet；表头顺序可以不同，也允许存在额外字段。</p>
+    <table><thead><tr><th>必须存在的表头</th><th>说明</th></tr></thead><tbody>
+      <tr><td>球场id中文</td><td>球场唯一 ID，可为数字或文本。</td></tr><tr><td>国家</td><td>原始国家字段；输出会统一为“日本”。</td></tr>
+      <tr><td>球场名称中文</td><td>球场中文名称。</td></tr><tr><td>城市</td><td>通常填写都道府县中文名。</td></tr><tr><td>地址</td><td>建议保留完整日本地址，支持邮编、日文、中文及常见英文地址。</td></tr>
+    </tbody></table>
+    <p class="small">旧版 <code>.xls</code> 不受支持。请先在 Excel 中选择“另存为”，保存成 <code>.xlsx</code>。</p>
+  </section>
+
+  <section>
+    <h2>输出文件说明</h2>
+    <h3>1. 标准工作簿</h3>
+    <p>包含且只包含 3 个 Sheet：<code>球场明细表（已修正版）</code>、<code>多语言市町村汇总表</code>、<code>都道府县多语言对照表</code>。</p>
+    <h3>2. 异常记录 CSV</h3>
+    <p>文件名以 <code>_异常记录.csv</code> 结尾。即使没有异常，也会保留表头。常见记录包括：</p>
+    <ul><li>城市或地址为空，已过滤；</li><li>地址中无法识别都道府县；</li><li>已识别都道府县，但市町村名称存在错字、旧称或特殊写法。</li></ul>
+    <p>遇到异常时，请先修正原表中的地址，再重新运行。不要直接把异常行随意归入相似地名。</p>
+  </section>
+
+  <section>
+    <h2>常见问题</h2>
+    <h3>双击后提示“没有找到 Python”</h3><p>安装 Python 3.9+，并勾选 <code>Add Python to PATH</code>。安装完成后重新双击“首次安装依赖.bat”。</p>
+    <h3>提示“有多个原始 Excel”</h3><p>把要处理的那份 Excel 直接拖到“开始处理Excel.bat”上。</p>
+    <h3>提示缺少字段</h3><p>检查首行表头是否与本说明中的 5 个字段完全一致，尤其不要多空格或改字。</p>
+    <h3>提示 Permission denied / 文件被占用</h3><p>关闭 Excel、WPS 或其他正在打开输出文件的程序，然后重试。</p>
+    <h3>安全软件拦截 .bat</h3><p>批处理文件只会调用本目录 Python 环境，不会上传数据。也可在命令提示符中运行：<br><code>.venv\Scripts\python.exe build_workbook.py "D:\你的文件.xlsx"</code></p>
+  </section>
+
+  <section>
+    <h2>本目录里哪些文件不能删除？</h2>
+    <div class="files">
+      <div class="card"><code>build_workbook.py</code><br><span class="small">主处理程序</span></div>
+      <div class="card"><code>data\</code><br><span class="small">日本行政区划与多语言参考库</span></div>
+      <div class="card"><code>wheels\</code><br><span class="small">Windows 离线依赖安装包</span></div>
+      <div class="card"><code>requirements.txt</code><br><span class="small">依赖版本清单</span></div>
+      <div class="card"><code>首次安装依赖.bat</code><br><span class="small">首次安装入口</span></div>
+      <div class="card"><code>开始处理Excel.bat</code><br><span class="small">日常运行入口</span></div>
+    </div>
+    <p class="small">行政区划参考库整理时间：2026 年 7 月。日本市町村未来若发生合并或更名，需要更新 <code>data</code> 参考库。</p>
+  </section>
+</main>
+<footer>日本球场地区多语言标准化工具 · Windows 离线使用说明</footer>
+</body>
+</html>
